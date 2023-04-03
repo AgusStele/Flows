@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <environments>Default</environments>
+    <interviewLabel>Create {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Lead</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <name>Create_Lead_Record</name>
+        <label>Create Lead Record</label>
+        <locationX>641</locationX>
+        <locationY>344</locationY>
+        <connector>
+            <targetReference>Lead_Succes_Creation</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Company</field>
+            <value>
+                <elementReference>Company_Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LastName</field>
+            <value>
+                <elementReference>Enter_Lead_Name</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <screens>
+        <name>Enter_Lead_Information</name>
+        <label>Enter Lead Information</label>
+        <locationX>754</locationX>
+        <locationY>206</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Create_Lead_Record</targetReference>
+        </connector>
+        <fields>
+            <name>Enter_Lead_Name</name>
+            <dataType>String</dataType>
+            <fieldText>&lt;b&gt;Enter Lead Name&lt;b&gt;</fieldText>
+            <fieldType>InputField</fieldType>
+            <helpText>&lt;p&gt;Please enter your last name&lt;/p&gt;</helpText>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Company_Name</name>
+            <dataType>String</dataType>
+            <fieldText>&lt;b&gt;Company Name&lt;b&gt;</fieldText>
+            <fieldType>InputField</fieldType>
+            <helpText>&lt;p&gt;Please enter your company name&lt;/p&gt;</helpText>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Lead_Succes_Creation</name>
+        <label>Lead Succes Creation</label>
+        <locationX>445</locationX>
+        <locationY>417</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>LeadSucessfullyCreate</name>
+            <fieldText>&lt;p&gt;&lt;a href=&quot;https://merycom-dev-ed.develop.lightning.force.com/lightning/r/Lead/{!Create_Lead_Record}/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Lead Sucessfully Create&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>613</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Enter_Lead_Information</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>
